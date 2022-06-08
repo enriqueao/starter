@@ -10,5 +10,11 @@ export interface Context {
 }
 
 export const context: Context = {
-    prisma
+    prisma,
+    jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+    user: {
+        id: "",
+        email: "",
+        name: "No tiene nombre"
+    }
 }

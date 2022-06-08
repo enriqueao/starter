@@ -1,11 +1,14 @@
 import 'reflect-metadata';
 import { ObjectType, Field, ID } from 'type-graphql';
 import { IsEmail } from 'class-validator';
+import { Post } from './Post';
+import { Reaction } from './Reaction';
+import { Comment } from './Comment';
 
 @ObjectType()
 export class User {
     @Field((type) => ID)
-    id: number
+    id: string
 
     @Field()
     @IsEmail()
@@ -14,11 +17,18 @@ export class User {
     @Field((type) => String, { nullable: true })
     name?: string | null
 
-    @Field((type) => String)
-    avatar?: string
+    @Field((type) => Post)
+    post?: Post[]
 
-    @Field()
-    userType?: number
+    @Field((type) => Comment)
+    comments?: Comment[]
 
+    @Field((type) => Reaction)
+    reactions?: Reaction[]
 
+    @Field((type) => Date)
+    createdAt: Date
+
+    @Field((type) => Date)
+    updatedAt: Date
 }

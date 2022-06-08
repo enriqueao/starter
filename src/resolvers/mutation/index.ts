@@ -1,1 +1,1 @@
-export * as UserMutation from './user/user'
+export * from './user'

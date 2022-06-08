@@ -6,15 +6,16 @@ import { DateTimeResolver } from 'graphql-scalars';
 
 import { context } from './config/context';
 
-import { resolvers } from './resolvers';
+import { UserQuery } from './resolvers/query'
+import { UserMutation } from './resolvers/mutation'
 
 const app = async () => {
     const schema = await tq.buildSchema({
-        resolvers,
+        resolvers: [ UserQuery, UserMutation ],
         scalarsMap: [{ type: GraphQLScalarType, scalar: DateTimeResolver }]
     })
 
-    new ApolloServer({schema, context}).listen({ port: 4000 }, () => {
+    new ApolloServer({ schema, context }).listen({ port: 4000 }, () => {
         console.log('server ready 🚀');
     })
 }
