@@ -19,7 +19,6 @@ export class UserCreateInput {
     name: string;
 }
 
-
 @InputType()
 export class FindUserById {
     @Field((type)=> ID)

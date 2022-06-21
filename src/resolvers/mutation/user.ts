@@ -13,7 +13,6 @@ import { User } from '../../db/entities'
 import { Context } from '../../config/context'
 import { UserCreateInput } from './inputs';
 
-
 @Resolver(User)
 export class UserMutation {
 
@@ -25,7 +24,7 @@ export class UserMutation {
         return ctx.prisma.user.create({
             data: {
                 email: data.email,
-                name: data.name
+                name: data.name,
             }
         })
     }
@@ -34,8 +33,8 @@ export class UserMutation {
     async changePassword(
         @Arg('data') data: UserCreateInput,
         @Ctx() ctx: Context
-    ): Promise<User> {
-        return ctx.prisma.user.update({
+    ): Promise<void> {
+        /* return ctx.prisma.user.update({
             where: {
                 id: ""
             },
@@ -43,7 +42,7 @@ export class UserMutation {
                 email: data.email,
                 name: data.name
             }
-        })
+        }) */
     }
 
 }

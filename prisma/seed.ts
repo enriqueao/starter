@@ -6,25 +6,24 @@ const userData: Prisma.UserCreateInput[] = [
     {
         email: "enrique@gmail.com",
         name: "Enrique",
-        posts: {
-            create: [
-                {
-                    title: "",
-                    content: "",
-                    published: true
-                }
-            ]
-        }
     }
 ]
+/* const postData: Prisma.PostCreateInput[] = [
+    {
+
+    }
+]
+const commentData: Prisma.CommentCreateInput[] = [
+    {
+
+    }
+] */
 
 async function main(){
     console.log('seeding...');
-    for(const u of userData){
-        const user = await prisma.user.create({
-            data: u
-        });
-    }
+    await prisma.user.createMany({ data: userData });
+    //await prisma.post.createMany(userData);
+    //await prisma.comment.createMany(commentData);
 }
 
 main()

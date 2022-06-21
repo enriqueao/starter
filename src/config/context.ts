@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
+import { mockDeep, DeepMockProxy } from "jest-mock-extended";
 import { User } from "../db/entities";
-
-export const prisma = new PrismaClient();
+import prisma from '../client';
 
 export interface Context {
     prisma: PrismaClient;
@@ -9,12 +9,16 @@ export interface Context {
     user?: User;
 }
 
+export type MockContext = {
+    prisma: DeepMockProxy<PrismaClient>;
+}
+
+export const createMockContext = (): MockContext => {
+    return {
+        prisma: mockDeep<PrismaClient>(),
+    }
+}
+
 export const context: Context = {
     prisma,
-    jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-    user: {
-        id: "",
-        email: "",
-        name: "No tiene nombre"
-    }
 }

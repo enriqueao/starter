@@ -26,9 +26,9 @@ export class User {
     @Field((type) => Reaction)
     reactions?: Reaction[]
 
-    @Field((type) => Date)
-    createdAt: Date
+    @Field((type) => Date, { nullable: true })
+    createdAt: Date | null
 
-    @Field((type) => Date)
-    updatedAt: Date
+    @Field((type) => Date, { nullable: true })
+    updatedAt: Date | null
 }
