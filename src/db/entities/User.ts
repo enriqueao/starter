@@ -17,8 +17,8 @@ export class User {
     @Field((type) => String, { nullable: true })
     name?: string | null
 
-    @Field((type) => Post)
-    post?: Post[]
+    @Field((type) => Post, { nullable: true })
+    post?: Post[] | null
 
     @Field((type) => Comment)
     comments?: Comment[]

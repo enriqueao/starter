@@ -6,12 +6,25 @@ import {
     InputType,
     Field,
     Arg,
+    FieldResolver,
+    Root,
 } from 'type-graphql'
-import { User } from '../../db/entities'
+import { Post, User } from '../../db/entities'
 import { Context } from '../../config/context'
 
 @Resolver(User)
 export class UserQuery {
+
+    /* @FieldResolver()
+    async posts(
+        @Root() user: User,
+        @Ctx() ctx: Context
+    ): Promise<Post[]> {
+        return ctx.prisma.user
+            .findUnique({ where: { id: user.id, }, })
+            .posts()
+    } */
+
 
     @Query(() => [User])
     async allUsers(

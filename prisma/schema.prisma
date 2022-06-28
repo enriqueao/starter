@@ -12,6 +12,7 @@ model Post {
   title      String     @default("Sin titulo")
   content    String?
   published  Boolean    @default(false)
+  viewCount  Int        @default(0)
   author     User       @relation(fields: [authorId], references: [id])
   authorId   String     @db.ObjectId
   createdAt  DateTime   @default(now())

@@ -25,7 +25,7 @@ export class Post {
     @Field((type) => Date)
     updatedAt: Date
 
-    @Field((type) => User)
-    author: User
+    @Field((type) => String)
+    authorId: string
 }
 

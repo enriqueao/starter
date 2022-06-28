@@ -7,14 +7,26 @@ import {
     Field,
     Mutation,
     Arg,
+    FieldResolver,
+    Root,
 } from 'type-graphql'
 import { Prisma } from '@prisma/client';
-import { User } from '../../db/entities'
+import { Post, User } from '../../db/entities'
 import { Context } from '../../config/context'
 import { UserCreateInput } from './inputs';
 
 @Resolver(User)
 export class UserMutation {
+
+    @FieldResolver()
+    async post(
+        @Root() user: User,
+        @Ctx() ctx: Context
+    ): Promise<Post[]> {
+        return ctx.prisma.user
+            .findUnique({ where: { id: user.id, }, })
+            .posts()
+    }
 
     @Mutation((returns) => User)
     async signupUser(
