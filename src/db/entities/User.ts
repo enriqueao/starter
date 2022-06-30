@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { ObjectType, Field, ID } from 'type-graphql';
+import { ObjectType, Field, ID, Arg } from 'type-graphql';
 import { IsEmail } from 'class-validator';
 import { Post } from './Post';
 import { Reaction } from './Reaction';
@@ -17,8 +17,8 @@ export class User {
     @Field((type) => String, { nullable: true })
     name?: string | null
 
-    @Field((type) => Post, { nullable: true })
-    post?: Post[] | null
+    @Field((type) => Post)
+    posts?: Post[]
 
     @Field((type) => Comment)
     comments?: Comment[]

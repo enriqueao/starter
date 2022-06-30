@@ -11,20 +11,20 @@ import {
 } from 'type-graphql'
 import { Post, User } from '../../db/entities'
 import { Context } from '../../config/context'
+import { FindUserById } from '../mutation/inputs';
 
-@Resolver(User)
+@Resolver(of => User)
 export class UserQuery {
 
-    /* @FieldResolver()
+    @FieldResolver()
     async posts(
         @Root() user: User,
         @Ctx() ctx: Context
     ): Promise<Post[]> {
-        return ctx.prisma.user
+        return await ctx.prisma.user
             .findUnique({ where: { id: user.id, }, })
-            .posts()
-    } */
-
+            .posts();
+    }
 
     @Query(() => [User])
     async allUsers(
@@ -36,25 +36,27 @@ export class UserQuery {
     @Query(() => User)
     async userById(
         @Ctx() ctx: Context,
+        @Arg('userId') id: string,
     ) {
-        /* return ctx.prisma.user.findUnique({
-            where: { id: params.userId }
-        }) */
+        return ctx.prisma.user.findUnique({
+            where: { id },
+            include: { posts: true }
+        });
     }
 
     @Query(() => String)
     async userNameEmail(
         @Ctx() ctx: Context,
-        // @Arg('params') params: { userId: string },
+        @Arg('params') params: FindUserById,
     ) {
-       /*  const user = await ctx.prisma.user.findUnique({
-            where: { id: params.userId }
-        }); */
+        const user = await ctx.prisma.user.findUnique({
+            where: { id: params.id }
+        });
 
-        /* if(!user){
-            throw new Error(`user not found with id ${params.userId }`)
+        if(!user){
+            throw new Error(`user not found with id ${params.id }`)
         }
 
-        return `${user.name}-${user.email}`; */
+        return `${user.name}-${user.email}`;
     }
 }

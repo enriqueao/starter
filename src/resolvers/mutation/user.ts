@@ -18,16 +18,6 @@ import { UserCreateInput } from './inputs';
 @Resolver(User)
 export class UserMutation {
 
-    @FieldResolver()
-    async post(
-        @Root() user: User,
-        @Ctx() ctx: Context
-    ): Promise<Post[]> {
-        return ctx.prisma.user
-            .findUnique({ where: { id: user.id, }, })
-            .posts()
-    }
-
     @Mutation((returns) => User)
     async signupUser(
         @Arg('data') data: UserCreateInput,
@@ -39,22 +29,6 @@ export class UserMutation {
                 name: data.name,
             }
         })
-    }
-
-    @Mutation((returns) => User)
-    async changePassword(
-        @Arg('data') data: UserCreateInput,
-        @Ctx() ctx: Context
-    ): Promise<void> {
-        /* return ctx.prisma.user.update({
-            where: {
-                id: ""
-            },
-            data: {
-                email: data.email,
-                name: data.name
-            }
-        }) */
     }
 
 }
