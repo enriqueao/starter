@@ -6,15 +6,12 @@ import { User } from './User';
 export class Post {
     @Field((type) => ID)
     id: string
-    
+
     @Field()
     title: string
 
     @Field((type) => String, { nullable: true })
     content: string | null
-
-    @Field((type) => Number, { defaultValue: true })
-    viewCount: string | null
 
     @Field()
     published: boolean
@@ -28,7 +25,7 @@ export class Post {
     @Field((type) => Date)
     updatedAt: Date
 
-    @Field((type) => User)
-    author: User
+    @Field((type) => User, { nullable: true })
+    author?: User | null
 }
 
