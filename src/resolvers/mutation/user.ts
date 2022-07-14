@@ -18,7 +18,7 @@ import { UserCreateInput } from './inputs';
 @Resolver(User)
 export class UserMutation {
 
-    @Mutation((returns) => User)
+    @Mutation(returns => User)
     async signupUser(
         @Arg('data') data: UserCreateInput,
         @Ctx() ctx: Context
